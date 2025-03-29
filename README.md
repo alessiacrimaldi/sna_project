@@ -1,8 +1,8 @@
-# 🤖 Social Network Analysis of Twitter Bots
-
 ![Python](https://img.shields.io/badge/Python-3.x-blue)
 ![NetworkX](https://img.shields.io/badge/NetworkX-3.x-green)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
+
+# 🤖 Social Network Analysis of Twitter Bots
 
 ## 🔬 Dataset
 **TwiBot-22** (https://twibot22.github.io/) is a comprehensive graph-based Twitter bot detection benchmark designed to address limitations in existing datasets, such as limited scale, incomplete graph structures, and low annotation quality.
