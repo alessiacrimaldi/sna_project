@@ -9,6 +9,8 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{textcomp}
+\usepackage{hyperref}
+\usepackage{xcolor}
 
 \author{Davide Cremonini, Artificial Intelligence, 0001137778
 \\Alessia Crimaldi, Artificial Intelligence, 0001145505
@@ -20,69 +22,144 @@
 \begin{document}
 \maketitle
 
-\section{Introduction}
-\label{introduction}
 
-\textbf{The context includes: the general field (e.g., literature, history,
-archaeology, tourism, biology, forensics, religious studies); the
-specific application (e.g., literary analysis, quantitative history,
-genetics, virology, forensics intelligence, tourism planning, biblical
-quantitative studies).}
+% Report in PDF format of at most 5000 words (also after revisions) — approximately, these correspond to 30k characters and 9–10 pages.
+
+% CHECKLIST!!!!!!
+
+% [ ]  It is clear how many networks you are going to analyse and their shape (monomodal, bipartite, etc.).
+
+% [ ]  For each network in the study, it is clear what are the nodes and what are the edges (when there exists an edge between nodes) and whether these are oriented or not.
+
+% [ ]  You apply a wide-enough range and number of measures to describe the phenomena you want to study (measures include centrality, groups, clustering, redundancy, equivalences, homophily, small-worldness, scale freedom, cohesion, connectedness, compactness, triad census, core-periphery, etc.).
+
+% [ ]  For each measure, you explain why you apply it (what phenomenon you investigate with it) and what semantics the measure has for your network (e.g., on a transport network, you apply betweenness centrality to find its most important junctions, since it measures the extent to which a node lies on paths between other nodes).
+
+% [ ]  The effort behind the study is appropriate for the number of students behind the project. Suggestion: projects can consider applying the same study design on different networks, to compare these (qualitatively and/or quantitatively) through the results of the same array of measures.	
+
+
+\section{Introduction}
+	\label{introduction}
+	
+	In the current historical moment, the widespread diffusion of AI systems designed to simulate human behaviour is increasingly evident. Our project aims to evaluate the effectiveness of these systems in the context of bot detection on Twitter, seeking to identify behavioural patterns that differentiate automated users (aka \textit{bots}) from human ones. To this end, we make use of Social Network Analysis techniques.
 
 
 \section{Problem and Motivation}
-\label{problem-and-motivation}
+	\label{problem-and-motivation}
 
-\textbf{What are the problems you want to address? Why are those problems
-important (impact, theoretical and/or practical needs, etc.)? What are
-the main contributions of the project?}
+	\textbf{What are the problems you want to address? Why are those problems important (impact, theoretical and/or practical needs, etc.)? What are the main contributions of the project?}
 
 
 \section{Datasets}
-\label{datasets}
+	\label{datasets}
 
-\textbf{How did you gather the data? Did you digitise it? How? Is the material
-publicly available? What tools did you use 1) to handle (store,
-manipulate) the data and 2) to compute measures on the data?}\\
-
-TwiBot-22 Paper \cite{twibot22}.
+	\textbf{What tools did you use 1) to handle (store, manipulate) the data and 2) to compute measures on the data?}\\
+	
+	We conducted our analysis using the TwiBot-22 dataset \cite{twibot22}, which is publicly available on GitHub\footnote{\href{https://github.com/LuoUndergradXJTU/TwiBot-22}{https://github.com/LuoUndergradXJTU/TwiBot-22}}. Since the dataset is already digitized, there was no need for any manual data collection or processing.
+	\vspace{0.1cm}
+	
+	TwiBot-22 is a comprehensive, graph-based benchmark for Twitter bot detection, featuring the largest dataset available up to date. It offers a diverse range of entities and relationships within the Twitter network, and boasts significantly improved annotation quality compared to previous datasets.
+	\vspace{0.1cm}
+	
+	Given the large size of the dataset, significant preprocessing was necessary. This involved splitting the .json files containing the tweets and the .csv file with the edges into smaller chunks, allowing for faster and more efficient manipulation of the data.
+	
+	\subsection{Adopted tools}
+		
+		networkx networkit
+		
+	\subsection{Analyzed networks}
+		\begin{itemize}
+			\item Large $\rightarrow$ Ukraine, Ai, Covid
+			\item Medium $\rightarrow$ Nato, Deeplearning, Nftcommunity
+			\item Small $\rightarrow$ Ruleoflaw, Feminist, Agenda2030
+		\end{itemize}
 
 
 \section{Validity and Reliability}
-\label{validity-and-reliability-not-needed-for-the-project-proposal}
+	\label{validity-and-reliability-not-needed-for-the-project-proposal}
 
-\textbf{How closely does the model of your dataset represent reality (validity)?
-How does the way you treat the data affect the reproducibility of the study (reliability)?}
+	\textbf{How closely does the model of your dataset represent reality (validity)? How does the way you treat the data affect the reproducibility of the study (reliability)?}
 
 
 \section{Measures and Results}
-\label{measures}
+	\label{measures}
 
-\textbf{What measures did you apply (brief explanation of how they work)? How do
-they relate to the intent of the study? Why are they relevant? What is the connection among the gathered data, the applied measures,
-and the properties found?}\\
-
-The experiments were conducted on an NVIDIA GeForce RTX 3090 GPU (24GB VRAM).\\
-
-Reputation \cite{Beskow2020FriendBot}.
+	\textbf{What measures did you apply (brief explanation of how they work)? How do they relate to the intent of the study? Why are they relevant? What is the connection among the gathered data, the applied measures, and the properties found?}\\
+	
+	% [ ]  You apply a wide-enough range and number of measures to describe the phenomena you want to study (measures include centrality, groups, clustering, redundancy, equivalences, homophily, small-worldness, scale freedom, cohesion, connectedness, compactness, triad census, core-periphery, etc.).
+	
+	\begin{itemize}
+		\item \textbf{Centrality}:
+			\begin{enumerate}
+				\item Degree centrality
+				\item Betweenness centrality
+				\item Eigenvector centrality
+				\item PageRank
+				\item Reputation \cite{Beskow2020FriendBot}.
+			\end{enumerate}
+		\item \textbf{Groups}:
+			\begin{enumerate}
+				\item 
+			\end{enumerate}
+		\item \textbf{Clustering}:
+			\begin{enumerate}
+				\item 
+			\end{enumerate}
+		\item \textbf{Redundancy}:
+			\begin{enumerate}
+				\item 
+			\end{enumerate}
+		\item \textbf{Equivalences}:
+			\begin{enumerate}
+				\item Structural equivalence
+				\item Regular equivalence
+			\end{enumerate}
+		\item \textbf{Homophily}:
+			\begin{enumerate}
+				\item 	
+			\end{enumerate}
+		\item \textbf{Small-worldness}:
+			\begin{enumerate}
+				\item 	
+			\end{enumerate}
+		\item \textbf{Scale freedom}:
+			\begin{enumerate}
+				\item 	
+			\end{enumerate}
+		\item \textbf{Cohesion}:
+			\begin{enumerate}
+				\item 	
+			\end{enumerate}
+		\item \textbf{Connectedness}:
+			\begin{enumerate}
+				\item 	
+			\end{enumerate}
+		\item \textbf{Compactness}:
+			\begin{enumerate}
+				\item 	
+			\end{enumerate}
+		\item \textbf{Triad census}:
+			
+		\item \textbf{Core-periphery}:
+			\begin{enumerate}
+				\item 	
+			\end{enumerate}
+	\end{itemize}
+	The experiments were conducted on an NVIDIA GeForce RTX 3090 GPU (24GB VRAM).\\
 
 
 \section{Conclusion}
-\label{conclusion}
+	\label{conclusion}
 
-\textbf{Qualitative analysis of the quantitative findings of the study.}
+	\textbf{Qualitative analysis of the quantitative findings of the study.}
 
 
 \section{Critique}
-\label{critique}
+	\label{critique}
 
-\textbf{Do you think your work solves the problem presented above? To which
-extent (completely, what parts)? Why? What could you have done
-differently to answer your research problems (e.g., gather data with
-additional information, build your model differently, apply alternative
-measures)?}\\
+	\textbf{Do you think your work solves the problem presented above? To which extent (completely, what parts)? Why? What could you have done differently to answer your research problems (e.g., gather data with additional information, build your model differently, apply alternative measures)?}\\
 
-The \textit{follower} and \textit{following} connections may not represent meaningful relations for bot detection, as the TwiBot-22 dataset lacks a clear separation between human and bot accounts in this aspect.
+	The \textit{follower} and \textit{following} connections may not represent meaningful relations for bot detection, as the TwiBot-22 dataset lacks a clear separation between human and bot accounts in this aspect.
 
 
 \bibliographystyle{plain}
