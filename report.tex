@@ -46,13 +46,13 @@
 
 \section{Problem and Motivation}
 	\label{problem-and-motivation}
-
+	
 	\textbf{What are the problems you want to address? Why are those problems important (impact, theoretical and/or practical needs, etc.)? What are the main contributions of the project?}
 
 
 \section{Datasets}
 	\label{datasets}
-
+	
 	\textbf{What tools did you use 1) to handle (store, manipulate) the data and 2) to compute measures on the data?}\\
 	
 	We conducted our analysis using the TwiBot-22 dataset \cite{twibot22}, which is publicly available on GitHub\footnote{\href{https://github.com/LuoUndergradXJTU/TwiBot-22}{https://github.com/LuoUndergradXJTU/TwiBot-22}}. Since the dataset is already digitized, there was no need for any manual data collection or processing.
@@ -77,22 +77,18 @@
 
 \section{Validity and Reliability}
 	\label{validity-and-reliability-not-needed-for-the-project-proposal}
-
-	\textbf{How closely does the model of your dataset represent reality (validity)? How does the way you treat the data affect the reproducibility of the study (reliability)?}
-
+	
+	\textbf{How closely does the model of your dataset represent reality (validity)? How does the way you treat the data affect the reproducibility of the study (reliability)?}\\
+	
    As discussed in the dataset official paper, the TwiBot-22 dataset was created trying to address and mitigate known problems of previous datasets, such as poor annotation quality and low dataset scale. This led to the construction of a large social graph with real word tweets, relationships between entities and metadata. This design allows the results to be statistically relevant and an accurate reflection of Twitter’s social dynamics. Additionally, the strong annotation pipeline used makes it also reliable and consistent, ensuring reproducibility for a wide range of bot detection and behaviour studies. The dataset is also easily accessible and free to use.
-
+	
     We exploit the dataset focusing only on follower-following relationships between users. We also experimented computing the same measures on the whole graph and on hashtag based sub-graphs, to introduce a topical dimension to our analysis. This approach allows us to preserve the dataset’s validity, as follower connections and shared hashtag activity represent real user behaviors and reflect meaningful patterns of the Twitter’s social structure. Our results are also totally reproducible since we describe the precise preprocessing pipeline used to restrcit the dataset for our purposes.
-
-    
 
 
 \section{Measures and Results}
 	\label{measures}
-
-	\textbf{What measures did you apply (brief explanation of how they work)? How do they relate to the intent of the study? Why are they relevant? What is the connection among the gathered data, the applied measures, and the properties found?}\\
 	
-	% [ ]  You apply a wide-enough range and number of measures to describe the phenomena you want to study (measures include centrality, groups, clustering, redundancy, equivalences, homophily, small-worldness, scale freedom, cohesion, connectedness, compactness, triad census, core-periphery, etc.).
+	\textbf{What measures did you apply (brief explanation of how they work)? How do they relate to the intent of the study? Why are they relevant? What is the connection among the gathered data, the applied measures, and the properties found?}\\
 	
 	\begin{itemize}
 		\item \textbf{Centrality}:
