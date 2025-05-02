@@ -47,25 +47,43 @@
 \section{Problem and Motivation}
 	\label{problem-and-motivation}
 	
-	\textbf{What are the problems you want to address? Why are those problems important (impact, theoretical and/or practical needs, etc.)? What are the main contributions of the project?}
+	%\textbf{What are the problems you want to address? Why are those problems important (impact, theoretical and/or practical needs, etc.)? What are the main contributions of the project?}
+
+    Nowadays it is clear the impact of social medias in the everyday life of people. These applications are not only a way to interact with friends or observing celebrities but they are becoming one of the most impacting form of information for all generations, from middle-aged demographics to young adults, interacting also with children most of the population extracts their knowledge through social media. The creation of automated accounts on these platforms can in fact impact the perception of people spreading false information or polarizing content, causing the clash between two sides not willing to discuss and find a middle ground. Bots can also, posting and interacting with other accounts, show a different distribution of opinions with respect to the real one, causing public opinion to be shifted and inducing entities like companies or public organizations to move in certain directions because of the feedback given by them.
+\vspace{0.1cm}
+
+    For this reasons we wanted to observe the behaviour of bots and human account to find a way to detect patterns that characterize one's relations. The focus of this project are the relations between the accounts, in the form of the "follow" action. This action is performed from one account to another signaling that the user is interested in receiving updates on the interactions of that account and it can be reciprocated.
 
 
 \section{Datasets}
 	\label{datasets}
 	
-	\textbf{What tools did you use 1) to handle (store, manipulate) the data and 2) to compute measures on the data?}\\
+	%\textbf{What tools did you use 1) to handle (store, manipulate) the data and 2) to compute measures on the data?}\\
 	
-	We conducted our analysis using the TwiBot-22 dataset \cite{twibot22}, which is publicly available on GitHub\footnote{\href{https://github.com/LuoUndergradXJTU/TwiBot-22}{https://github.com/LuoUndergradXJTU/TwiBot-22}}. Since the dataset is already digitized, there was no need for any manual data collection or processing.
+	We conducted our analysis using the TwiBot-22 dataset \cite{twibot22}, which is publicly available on GitHub\footnote{\href{https://github.com/LuoUndergradXJTU/TwiBot-22}{https://github.com/LuoUndergradXJTU/TwiBot-22}}. 
 	\vspace{0.1cm}
 	
 	TwiBot-22 is a comprehensive, graph-based benchmark for Twitter bot detection, featuring the largest dataset available up to date. It offers a diverse range of entities and relationships within the Twitter network, and boasts significantly improved annotation quality compared to previous datasets.
 	\vspace{0.1cm}
 	
-	Given the large size of the dataset, significant preprocessing was necessary. This involved splitting the .json files containing the tweets and the .csv file with the edges into smaller chunks, allowing for faster and more efficient manipulation of the data.
+	Given the extremely large size of the dataset it is impossible to work with the full dataset with our resources. For this reason preprocessing has been used to elaborate the dataset in a more efficient way.
+    \vspace{0.1cm}
+
+        \subsection{Preprocessing}
+        The two files we focus on are tweets and edges. The preprocessing is needed to extract the relation \textit{follower-following} for every user to build the network and to obtain the number of tweets of each user.
+        \vspace{0.1cm}
+        We create chunks for edges and for tweets that is possible to store in the avaliable RAMs.
+        \vspace{0.1cm}
+        After this technical solution to be able to work with all data we proceed in creating the coommunities. The communities are sub-networks of people that used the same hashtag in their tweets. They will be used to check if the patterns found in the network are robust to network chances or are network specific. To test the robustness of the patterns we divided the subnetworks in different categories (large, medium and small communities) to test the results on different scales.
 	
 	\subsection{Adopted tools}
+		The python libraries used in this project are:
+        \begin{itemize}
+            \item the \textit{Polars} library and the \textit{ijson} parser for the manipulation of the dataset.
+            \item the \textit{NetworkX} and \textit{NetworKit} libraries to create the network and to calculate the measures on it.
+            \item the \textit{seaborn}, \textit{SciPy} and \textit{scikit-learn} libraries to search possible patterns in the bots/humans behaviour.
+        \end{itemize}
 		
-		networkx networkit
 		
 	\subsection{Analyzed networks}
 		\begin{itemize}
@@ -78,16 +96,16 @@
 \section{Validity and Reliability}
 	\label{validity-and-reliability-not-needed-for-the-project-proposal}
 	
-   As discussed in the dataset official paper \cite{twibot22}, the TwiBot-22 dataset was created trying to address and mitigate known problems of previous datasets, such as poor annotation quality and low dataset scale. This led to the construction of a large social graph with real word tweets, relationships between entities and metadata. This design allows the results to be statistically relevant and it accurately reflects Twitter’s social dynamics. Moreover, the dataset benefits from a strong annotation pipeline, which guarantees reliability and consistency, and reproducibility for a wide range of bot detection and behaviour analysis studies. It is also easily accessible and freely available.
+   As discussed in the dataset official paper \cite{twibot22}, the TwiBot-22 dataset was created trying to address and mitigate known problems of previous datasets, such as poor annotation quality and low dataset scale. This led to the construction of a large social graph with real world tweets, relationships between entities and metadata. This design allows the results to be statistically relevant and it accurately reflects Twitter’s social dynamics. Moreover, the dataset benefits from a strong annotation pipeline, which guarantees reliability and consistency, and reproducibility for a wide range of bot detection and behaviour analysis studies. It is also easily accessible and freely available.
    \vspace{0.1cm}
 	
-    In our work, we exploited the dataset focusing only on \textit{follower-following} relationships between users. Additionally, we experimented with applying the same analytical measures to the full graph and to subgraphs based on shared hashtags, in order to introduce a topical dimension to our analysis. This approach maintains the dataset’s validity, as both follower links and shared hashtag activity represent authentic user behaviours and capture meaningful patterns within Twitter’s social structure. Our results are also fully reproducible and reliable, as we provide a detailed description of the preprocessing pipeline used to tailor the dataset to our specific research goals.
+    In our work, we exploited the dataset focusing only on \textit{follower-following} relationships between users. Additionally, we experimented with applying the same analytical measures to the full graph and to subgraphs based on shared hashtags, in order to introduce a topical dimension to our analysis. This approach maintains the validity of the dataset, as both the follower links and the shared hashtag activity represent authentic user behaviours and capture meaningful patterns within Twitter’s social structure. Our results are also fully reproducible and reliable, as we provide a detailed description of the preprocessing pipeline used to tailor the dataset to our specific research goals.
 
 
 \section{Measures and Results}
 	\label{measures}
 	
-	\textbf{What measures did you apply (brief explanation of how they work)? How do they relate to the intent of the study? Why are they relevant? What is the connection among the gathered data, the applied measures, and the properties found?}\\
+	%\textbf{What measures did you apply (brief explanation of how they work)? How do they relate to the intent of the study? Why are they relevant? What is the connection among the gathered data, the applied measures, and the properties found?}\\
 	
 	\begin{itemize}
 		\item \textbf{Centrality}:
