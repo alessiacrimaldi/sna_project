@@ -110,11 +110,13 @@
 	\begin{itemize}
 		\item \textbf{Centrality}:
 			\begin{enumerate}
-				\item Degree centrality
-				\item Betweenness centrality
-				\item Eigenvector centrality
-				\item PageRank
-				\item Reputation \cite{Beskow2020FriendBot}.
+				\item Degree centrality: considering the entire population of users, the degree centrality is the ratio between the number of followers a user has with respect to the total population, excluding itself. We might expect moderate values for humans, with followers growing organically, while it is probably more common for bots to have extreme values, either high, if artificially inflated, or low, for simple spam bots.              
+				\item Betweenness centrality: centrality of a user depends on its position as a crossroad between paths from other users. It may measure how much a user acts as a "common friend" between others. We expect higher values for some humans acting as bridges between communities, while bots are probably more likely to be peripheral.  
+				\item Eigenvector centrality: 
+                    \item Katz centrality:
+                    \item Closeness centrality: the user's centrality is inversely proportional to the distance it has from all other nodes. When low it can act as a measure of how much a user is isolated (only applicable to single components). As said before for similar measures, we expect the humans to be generally better integrated in the networks, resulting in an higher value for the closeness centrality, while bots are usually more isolated. 
+				\item PageRank:
+				\item Reputation: We introduce the reputation measure as described in \cite{Beskow2020FriendBot}.
 			\end{enumerate}
 		\item \textbf{Groups}:
 			\begin{enumerate}
@@ -122,7 +124,7 @@
 			\end{enumerate}
 		\item \textbf{Clustering}:
 			\begin{enumerate}
-				\item 
+				\item Clutering Coefficient: for each user \(u\) and the set of its neighbours \(N_{u}\) (users that follow it or are followed by it) this measure is the ratio between the number of couples of \(N_{u}\) that have a relationship between each other and their total number. This gives us insight on how a user acts as a centre of its local community. We expect human to be part of more meaningful communities, thus resulting in higher values.
 			\end{enumerate}
 		\item \textbf{Redundancy}:
 			\begin{enumerate}
