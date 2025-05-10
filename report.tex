@@ -22,7 +22,6 @@
 \begin{document}
 \maketitle
 
-
 % Report in PDF format of at most 5000 words (also after revisions) — approximately, these correspond to 30k characters and 9–10 pages.
 
 % CHECKLIST!!!!!!
@@ -37,45 +36,29 @@
 
 % [ ]  The effort behind the study is appropriate for the number of students behind the project. Suggestion: projects can consider applying the same study design on different networks, to compare these (qualitatively and/or quantitatively) through the results of the same array of measures.	
 
-
 \section{Introduction}
 	\label{introduction}
-	
+	% The context includes: the general field (e.g., literature, history, archaeology, tourism, biology, forensics, religious studies); the specific application (e.g., literary analysis, quantitative history, genetics, virology, forensics intelligence, tourism planning, biblical quantitative studies).
 	In the current historical moment, the widespread diffusion of AI systems designed to simulate human behaviour is increasingly evident. Our project aims to evaluate the effectiveness of these systems in the context of bot detection on Twitter, seeking to identify behavioural patterns that differentiate automated users (aka \textit{bots}) from human ones. To this end, we make use of Social Network Analysis techniques.
 
 
 \section{Problem and Motivation}
 	\label{problem-and-motivation}
-	
-	%\textbf{What are the problems you want to address? Why are those problems important (impact, theoretical and/or practical needs, etc.)? What are the main contributions of the project?}
-
-    Nowadays it is clear the impact of social medias in the everyday life of people. These applications are not only a way to interact with friends or observing celebrities but they are becoming one of the most impacting form of information for all generations, from middle-aged demographics to young adults, interacting also with children most of the population extracts their knowledge through social media. The creation of automated accounts on these platforms can in fact impact the perception of people spreading false information or polarizing content, causing the clash between two sides not willing to discuss and find a middle ground. Bots can also, posting and interacting with other accounts, show a different distribution of opinions with respect to the real one, causing public opinion to be shifted and inducing entities like companies or public organizations to move in certain directions because of the feedback given by them.
-\vspace{0.1cm}
-
+	% What are the problems you want to address? Why are those problems important (impact, theoretical and/or practical needs, etc.)? What are the main contributions of the project?
+    Nowadays it is clear the impact of social medias in the everyday life of people. These applications are not only a way to interact with friends or observing celebrities but they are becoming one of the most impacting form of information for all generations, from middle-aged demographics to young adults, interacting also with children most of the population extracts their knowledge through social media. The creation of automated accounts on these platforms can in fact impact the perception of people spreading false information or polarizing content, causing the clash between two sides not willing to discuss and find a middle ground. Bots can also, posting and interacting with other accounts, show a different distribution of opinions with respect to the real one, causing public opinion to be shifted and inducing entities like companies or public organizations to move in certain directions because of the feedback given by them.\\
     For this reasons we wanted to observe the behaviour of bots and human account to find a way to detect patterns that characterize one's relations. The focus of this project are the relations between the accounts, in the form of the "follow" action. This action is performed from one account to another signaling that the user is interested in receiving updates on the interactions of that account and it can be reciprocated.
 
 
 \section{Datasets}
 	\label{datasets}
-	
-	%\textbf{What tools did you use 1) to handle (store, manipulate) the data and 2) to compute measures on the data?}\\
-	
-	We conducted our analysis using the TwiBot-22 dataset \cite{twibot22}, which is publicly available on GitHub\footnote{\href{https://github.com/LuoUndergradXJTU/TwiBot-22}{https://github.com/LuoUndergradXJTU/TwiBot-22}}. 
-	\vspace{0.1cm}
-	
-	TwiBot-22 is a comprehensive, graph-based benchmark for Twitter bot detection, featuring the largest dataset available up to date. It offers a diverse range of entities and relationships within the Twitter network, and boasts significantly improved annotation quality compared to previous datasets.
-	\vspace{0.1cm}
-	
+	% How did you gather the data? Did you digitise it? How? Is the material publicly available? What tools did you use 1) to handle (store, manipulate) the data and 2) to compute measures on the data?
+	We conducted our analysis using the TwiBot-22 dataset \cite{twibot22}, which is publicly available on GitHub\footnote{\href{https://github.com/LuoUndergradXJTU/TwiBot-22}{https://github.com/LuoUndergradXJTU/TwiBot-22}}.\\
+	TwiBot-22 is a comprehensive, graph-based benchmark for Twitter bot detection, featuring the largest dataset available up to date. It offers a diverse range of entities and relationships within the Twitter network, and boasts significantly improved annotation quality compared to previous datasets.\\
 	Given the extremely large size of the dataset it is impossible to work with the full dataset with our resources. For this reason preprocessing has been used to elaborate the dataset in a more efficient way.
-    \vspace{0.1cm}
-
-        \subsection{Preprocessing}
-        The two files we focus on are tweets and edges. The preprocessing is needed to extract the relation \textit{follower-following} for every user to build the network and to obtain the number of tweets of each user.
-        \vspace{0.1cm}
-        We create chunks for edges and for tweets that is possible to store in the avaliable RAMs.
-        \vspace{0.1cm}
-        After this technical solution to be able to work with all data we proceed in creating the coommunities. The communities are sub-networks of people that used the same hashtag in their tweets. They will be used to check if the patterns found in the network are robust to network chances or are network specific. To test the robustness of the patterns we divided the subnetworks in different categories (large, medium and small communities) to test the results on different scales.
-	
+	\subsection{Preprocessing}
+        The two files we focus on are tweets and edges. The preprocessing is needed to extract the relation \textit{follower-following} for every user to build the network and to obtain the number of tweets of each user.\\
+        We create chunks for edges and for tweets that is possible to store in the avaliable RAMs.\\
+        After this technical solution to be able to work with all data we proceed in creating the communities. The communities are sub-networks of people that used the same hashtag in their tweets. They will be used to check if the patterns found in the network are robust to network chances or are network specific. To test the robustness of the patterns we divided the subnetworks in different categories (large, medium and small communities) to test the results on different scales.
 	\subsection{Adopted tools}
 		The python libraries used in this project are:
         \begin{itemize}
@@ -83,9 +66,8 @@
             \item the \textit{NetworkX} and \textit{NetworKit} libraries to create the network and to calculate the measures on it.
             \item the \textit{seaborn}, \textit{SciPy} and \textit{scikit-learn} libraries to search possible patterns in the bots/humans behaviour.
         \end{itemize}
-		
-		
 	\subsection{Analyzed networks}
+    	As discussed above, we divided subnetworks into three classes, based on the number of nodes (i.e. users) they contain: small networks have less than 1000 nodes, medium-size have between 1000 and 10000 and large have more than 10000. Among each class we chose to focus on communities which may present more polarising opinions as they discussed hot topics at the time of the dataset creation.
 		\begin{itemize}
 			\item Large $\rightarrow$ Ukraine, Ai, Covid
 			\item Medium $\rightarrow$ Nato, Deeplearning, Nftcommunity
@@ -95,91 +77,44 @@
 
 \section{Validity and Reliability}
 	\label{validity-and-reliability-not-needed-for-the-project-proposal}
-	
-   As discussed in the dataset official paper \cite{twibot22}, the TwiBot-22 dataset was created trying to address and mitigate known problems of previous datasets, such as poor annotation quality and low dataset scale. This led to the construction of a large social graph with real world tweets, relationships between entities and metadata. This design allows the results to be statistically relevant and it accurately reflects Twitter’s social dynamics. Moreover, the dataset benefits from a strong annotation pipeline, which guarantees reliability and consistency, and reproducibility for a wide range of bot detection and behaviour analysis studies. It is also easily accessible and freely available.
-   \vspace{0.1cm}
-	
+	% How closely does the model of your dataset represent reality (validity)? How does the way you treat the data affect the reproducibility of the study (reliability)?
+   As discussed in its official paper \cite{twibot22}, the TwiBot-22 dataset was created trying to address and mitigate known problems of previous datasets, such as poor annotation quality and low dataset scale. This led to the construction of a large social graph with real world tweets, relationships between entities and metadata. This design allows the results to be statistically relevant and it accurately reflects Twitter’s social dynamics. Moreover, the dataset benefits from a strong annotation pipeline, which guarantees reliability and consistency, and reproducibility for a wide range of bot detection and behaviour analysis studies. It is also easily accessible and freely available.\\
     In our work, we exploited the dataset focusing only on \textit{follower-following} relationships between users. Additionally, we experimented with applying the same analytical measures to the full graph and to subgraphs based on shared hashtags, in order to introduce a topical dimension to our analysis. This approach maintains the validity of the dataset, as both the follower links and the shared hashtag activity represent authentic user behaviours and capture meaningful patterns within Twitter’s social structure. Our results are also fully reproducible and reliable, as we provide a detailed description of the preprocessing pipeline used to tailor the dataset to our specific research goals.
 
 
 \section{Measures and Results}
 	\label{measures}
-	
-	%\textbf{What measures did you apply (brief explanation of how they work)? How do they relate to the intent of the study? Why are they relevant? What is the connection among the gathered data, the applied measures, and the properties found?}\\
-	
-	\begin{itemize}
-		\item \textbf{Centrality}:
-			\begin{enumerate}
-				\item Degree centrality: considering the entire population of users, the degree centrality is the ratio between the number of followers a user has with respect to the total population, excluding itself. We might expect moderate values for humans, with followers growing organically, while it is probably more common for bots to have extreme values, either high, if artificially inflated, or low, for simple spam bots.              
-				\item Betweenness centrality: centrality of a user depends on its position as a crossroad between paths from other users. It may measure how much a user acts as a "common friend" between others. We expect higher values for some humans acting as bridges between communities, while bots are probably more likely to be peripheral.  
-				\item Eigenvector centrality: 
-                    \item Katz centrality:
-                    \item Closeness centrality: the user's centrality is inversely proportional to the distance it has from all other nodes. When low it can act as a measure of how much a user is isolated (only applicable to single components). As said before for similar measures, we expect the humans to be generally better integrated in the networks, resulting in an higher value for the closeness centrality, while bots are usually more isolated. 
-				\item PageRank:
-				\item Reputation: We introduce the reputation measure as described in \cite{Beskow2020FriendBot}.
-			\end{enumerate}
-		\item \textbf{Groups}:
-			\begin{enumerate}
-				\item 
-			\end{enumerate}
-		\item \textbf{Clustering}:
-			\begin{enumerate}
-				\item Clutering Coefficient: for each user \(u\) and the set of its neighbours \(N_{u}\) (users that follow it or are followed by it) this measure is the ratio between the number of couples of \(N_{u}\) that have a relationship between each other and their total number. This gives us insight on how a user acts as a centre of its local community. We expect human to be part of more meaningful communities, thus resulting in higher values.
-			\end{enumerate}
-		\item \textbf{Redundancy}:
-			\begin{enumerate}
-				\item 
-			\end{enumerate}
-		\item \textbf{Equivalences}:
-			\begin{enumerate}
-				\item Structural equivalence
-				\item Regular equivalence
-			\end{enumerate}
-		\item \textbf{Homophily}:
-			\begin{enumerate}
-				\item 	
-			\end{enumerate}
-		\item \textbf{Small-worldness}:
-			\begin{enumerate}
-				\item 	
-			\end{enumerate}
-		\item \textbf{Scale freedom}:
-			\begin{enumerate}
-				\item 	
-			\end{enumerate}
-		\item \textbf{Cohesion}:
-			\begin{enumerate}
-				\item 	
-			\end{enumerate}
-		\item \textbf{Connectedness}:
-			\begin{enumerate}
-				\item 	
-			\end{enumerate}
-		\item \textbf{Compactness}:
-			\begin{enumerate}
-				\item 	
-			\end{enumerate}
-		\item \textbf{Triad census}:
-			
-		\item \textbf{Core-periphery}:
-			\begin{enumerate}
-				\item 	
-			\end{enumerate}
-	\end{itemize}
-	The experiments were conducted on an NVIDIA GeForce RTX 3090 GPU (24GB VRAM).\\
+	% What measures did you apply (brief explanation of how they work)? How do they relate to the intent of the study? Why are they relevant? What is the connection among the gathered data, the applied measures, and the properties found?
+	The experiments were conducted on an NVIDIA GeForce RTX 3090 GPU (24GB VRAM).
+	\subsection{Measuring the Network}
+	\subsection{Measuring the Nodes}
+		Being tasked with finding notable features which may highlight the differences between human and bot users, we decided to compute well-established network measurements on the graphs. As the objective of this paper is to identify anomalies in the behaviour of specific users, we decided to focus our attention on node measures. Alongside these we added a few broader scope measures to show the presence of local groups around certain users.
+		\paragraph{Centrality.}
+		\begin{itemize}
+			\item \textbf{Degree centrality.} Considering the entire population of users, the degree centrality is the total sum of the number of followers a user has and the number of accounts they follow. We might expect moderate values for humans, with followers growing organically, while it is probably more common for bots to have extreme values, either high, if artificially inflated, or low, for simple spam bots. To better investigate this hypothesis, we considered three different measures: \textit{in\_degree} (the number of followers), \textit{out\_degree} (number of followed), \textit{degree\_centrality} (sum of the two).
+			\item \textbf{Reputation.} On top of the simple degree centrality, we decided to introduce the reputation measure as described in \cite{Beskow2020FriendBot}. This acts as a ratio between the \textit{in\_degree} and the \textit{degree\_centrality} and highlights how unbalanced the distribution between followers and followed is for each user. While most humans should have a ratio close to 0.5, some notable ones may be closer to 1, if they have proportionally more followers. On the other side we expect bots programmed to boost following to have a reputation close to 0.
+			\item \textbf{Reciprocity.} Leveraging the directed nature of the network, it is possible to compute how many of the follow relationships are reciprocated by each user. This may give us an insight into the nature of users, as we can expect most humans to follow each other back, while bots prefer one-sided relations.
+			\item \textbf{Betweenness centrality.} This measure allows us to understand how much a node acts as a crossroad between paths from other users. This may be an index of how much a user acts as a "common friend" between others. We expect higher values for some humans acting as bridges between communities, while bots are more likely to be peripheral.
+			\item \textbf{Eigenvector centrality.} This centrality highlights the importance of a node depending on its neighbours. In our case, having a directed network, we followed NetworkX approach and computed the left-eigenvector, which adds the centrality of the predecessors. This means that a node will be given more relevance if it is followed by important nodes. We expect most bots to have a low eigenvector centrality, as it is unlikely for them to gather too much legitimacy from human users, while we expect a more balanced distribution for the latter, with some notables gaining more relevance.
+			\item \textbf{PageRank.} Given that eigenvector centrality suffers because of zero-trailing, we noticed that these types of networks contained a high number of elements with 0 \textit{in\_degree}, so we decided to introduce the PageRank measure to better investigate the phenomena discussed before, accounting for the specifics of our problem. 
+			\item \textbf{Hubs \& Authorities.} Another approach we attempted to exploit the directed nature of the graph is the deployment of the HITS algorithm. Supposing bots are less followed than humans, we expect them not to act as authorities and to be moderate hubs at best, while humans should have a more evenly distributed behaviour.
+		\end{itemize}
+		\paragraph{Clustering Coefficient.}
+		For each user \(u\) and the set of its neighbours \(N_{u}\) (users that follow it or are followed by it) this measure is the ratio between the number of couples of \(N_{u}\) that have a relationship between each other and their total number. This gives us insight on how a user acts as a centre of its local community. We expect human to be part of more meaningful communities, thus resulting in higher values.
+		\paragraph{Average Neighbourhood Degree.}
+		\paragraph{Core Number.}
+		\paragraph{Number of Triangles.}
+        \paragraph{Number of Tweets.}
 
 
 \section{Conclusion}
 	\label{conclusion}
-
-	\textbf{Qualitative analysis of the quantitative findings of the study.}
+	% Qualitative analysis of the quantitative findings of the study.
 
 
 \section{Critique}
 	\label{critique}
-
-	\textbf{Do you think your work solves the problem presented above? To which extent (completely, what parts)? Why? What could you have done differently to answer your research problems (e.g., gather data with additional information, build your model differently, apply alternative measures)?}\\
-
+	% Do you think your work solves the problem presented above? To which extent (completely, what parts)? Why? What could you have done differently to answer your research problems (e.g., gather data with additional information, build your model differently, apply alternative measures)?
 	The \textit{follower} and \textit{following} connections may not represent meaningful relations for bot detection, as the TwiBot-22 dataset lacks a clear separation between human and bot accounts in this aspect.
 
 
