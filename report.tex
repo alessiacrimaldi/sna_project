@@ -82,7 +82,7 @@
 		\begin{figure}[H]
     		\centering
     		\includegraphics[width=\textwidth]{feminist_subnetwork.png}
-    		\caption{Feminist subnetwork {\footnotesize (\href{https://alessiacrimaldi.github.io/sna_project/results/subnetworks/feminist/feminist_network}{link})}}
+    		\caption{Feminist subnetwork (\href{https://alessiacrimaldi.github.io/sna_project/results/subnetworks/feminist/feminist_network}{link})}
     		\label{fig:feminist_subnetwork}
 		\end{figure}
 		
@@ -155,99 +155,152 @@
     	After computing the measures described above for each of the proposed networks, we proceeded to analyse them by first observing the complete network results, then comparing them to the results shown by the subnetworks of different sizes. Our goal here was to first detect recurring patterns in said distributions and to evaluate the effectiveness of each subnetwork at capturing the original structure.
     	\paragraph{Centrality.}
 		\begin{itemize}
-			\item \textbf{Degree centrality.} From this simple measure, we can see a slight difference in the distributions of humans and bots, as the seconds seem to have a higher density towards zero, meaning there's a higher number of bots which have little to no connection, while humans tend to form more connections in general.\\
-                Observing the \textit{in\_degree} and \textit{out\_degree} distributions, we can see that this difference may be related to a higher number of incoming relationships with respect to the outgoing ones. This may suggest that humans have a higher number of followers. 
+			\item \textbf{Degree centrality.} From this simple measure, we can see a slight difference in the distributions of humans and bots, as the seconds seem to have a higher density towards zero, meaning there's a higher number of bots which have little to no connection, while humans tend to form more connections in general.
                 \begin{figure}[H]
                 	\centering
-                    \includegraphics[width=0.75\textwidth]{complete_degree_centrality.png}
+                    \includegraphics[width=0.75\textwidth]{results/complete_degree_centrality.png}
                     \caption{Degree Centrality distribution for complete network}
                 \end{figure}
+				\begin{figure}[H]
+    				\centering
+    				\setlength{\fboxsep}{0pt}
+    				\setlength{\fboxrule}{0.5pt}
+    				\fcolorbox{black}{white}{\includegraphics[width=0.65\textwidth]{measures/feminist_degree_centrality.png}}
+    				\caption{Degree Centrality values for feminist subnetwork}
+				\end{figure}
+                Observing the \textit{in\_degree} and \textit{out\_degree} distributions, we can see that this difference may be related to a higher number of incoming relationships with respect to the outgoing ones. This may suggest that humans have a higher number of followers.
                 \begin{figure}[H]
                     \centering
-                    \includegraphics[width=0.75\textwidth]{complete_in_degree.png}
+                    \includegraphics[width=0.75\textwidth]{results/complete_in_degree.png}
                     \caption{In-Degree Centrality distribution for complete network}
                 \end{figure}
                 \begin{figure}[H]
                     \centering
-                    \includegraphics[width=0.75\textwidth]{complete_out_degree.png}
+                    \includegraphics[width=0.75\textwidth]{results/complete_out_degree.png}
                     \caption{Out-Degree Centrality distribution for complete network}
                 \end{figure}
+				\begin{figure}[H]
+    				\centering
+    				\begin{minipage}[b]{0.49\textwidth}    				
+        				\centering
+        				\setlength{\fboxsep}{0pt}
+    					\setlength{\fboxrule}{0.5pt}
+        				\fcolorbox{black}{white}{\includegraphics[width=\textwidth]{measures/ruleoflaw_indegree.png}}
+        				\small\textit{\small In-Degree}
+    				\end{minipage}
+    				\hfill
+    				\begin{minipage}[b]{0.49\textwidth}
+        				\centering
+        				\setlength{\fboxsep}{0pt}
+    					\setlength{\fboxrule}{0.5pt}
+        				\fcolorbox{black}{white}{\includegraphics[width=\textwidth]{measures/ruleoflaw_outdegree.png}}
+        				\small\textit{\small Out-Degree}
+    				\end{minipage}
+    				\caption{In-Degree and Out-Degree Centrality values for ruleoflaw subnetwork}
+				\end{figure}
 			\item \textbf{Reputation.} Strictly tied to the degree centralities results are those from the reputation score, since they are derived from it.
                 The obtained results match our predictions, as we can observe that the majority of humans fall in the central bins, having an average reputation score, with some notable ones having a very high score, close to 1. Concerning bots, we can instead notice a high concentration of low reputation scores. Surprisingly, there is still a quite noticeable number of bots with an average reputation score, but we can notice that there are almost no bots with very high reputation scores.
                 \begin{figure}[H]
                 	\centering
-                    \includegraphics[width=0.75\textwidth]{complete_reputation.png}
+                    \includegraphics[width=0.75\textwidth]{results/complete_reputation.png}
                     \caption{Reputation distribution for complete network}
                 \end{figure}
-			\item \textbf{Reciprocity.} The results obtained for this measure are inconclusive. Even if our expectation was to find a bigger density of bot nodes near extreme values and a more homogeneous distribution for human users in the graphs [REFERENCE] we can observe that every distribution has his own patterns. As we expected the distributions of bots are usually skewed towards the extremes but the humans, in opposition with our beliefs, present a similar behaviour.
+			\item \textbf{Reciprocity.} The results obtained for this measure are inconclusive. Even if our expectation was to find a bigger density of bot nodes near extreme values and a more homogeneous distribution for human users in the graphs \textcolor{green}{[REFERENCE]}, we can observe that every distribution has his own patterns. As we expected, the distributions of bots are usually skewed towards the extremes but the humans, in opposition with our beliefs, present a similar behaviour.
 				\begin{figure}[H]
                 	\centering
-                    \includegraphics[width=0.75\textwidth]{complete_reciprocity.png}
+                    \includegraphics[width=0.75\textwidth]{results/complete_reciprocity.png}
                     \caption{Reciprocity distribution for complete network}
                 \end{figure}
 			\item \textbf{Betweenness centrality.}
                 \begin{figure}[H]
                     \centering
-                    \includegraphics[width=0.75\textwidth]{complete_betweenness.png}
+                    \includegraphics[width=0.75\textwidth]{results/complete_betweenness.png}
                     \caption{Betweenness Centrality distribution for complete network}
                 \end{figure}
 			\item \textbf{Eigenvector centrality.}
 				\begin{figure}[H]
                     \centering
-                    \includegraphics[width=0.75\textwidth]{complete_eigenvector.png}
+                    \includegraphics[width=0.75\textwidth]{results/complete_eigenvector.png}
                     \caption{Eigenvector Centrality distribution for complete network}
                 \end{figure}      
 			\item \textbf{PageRank.}
                 \begin{figure}[H]
                     \centering
-                    \includegraphics[width=0.75\textwidth]{complete_pagerank.png}
+                    \includegraphics[width=0.75\textwidth]{results/complete_pagerank.png}
                     \caption{Pagerank Centrality distribution for complete network}
                 \end{figure}
             \item \textbf{Hubs \& Authorities.}
                 \begin{figure}[H]
                     \centering
-                    \includegraphics[width=0.75\textwidth]{complete_hubs.png}
+                    \includegraphics[width=0.75\textwidth]{results/complete_hubs.png}
                     \caption{Hubs scores distribution for complete network}
                 \end{figure}
                 \begin{figure}[H]
                     \centering
-                    \includegraphics[width=0.75\textwidth]{complete_authorities.png}
-                    \caption{Authority scores distribution for complete network}
+                    \includegraphics[width=0.75\textwidth]{results/complete_authorities.png}
+                    \caption{Authorities scores distribution for complete network}
                 \end{figure}
                 \begin{figure}[H]
+    				\centering
+    				\begin{minipage}[b]{0.49\textwidth}    				
+        				\centering
+        				\setlength{\fboxsep}{0pt}
+    					\setlength{\fboxrule}{0.5pt}
+        				\fcolorbox{black}{white}{\includegraphics[width=\textwidth]{measures/feminist_authorities.png}}
+        				\small\textit{\small Authorities}
+    				\end{minipage}
+    				\hfill
+    				\begin{minipage}[b]{0.49\textwidth}
+        				\centering
+        				\setlength{\fboxsep}{0pt}
+    					\setlength{\fboxrule}{0.5pt}
+        				\fcolorbox{black}{white}{\includegraphics[width=\textwidth]{measures/feminist_hubs.png}}
+        				\small\textit{\small Hubs}
+    				\end{minipage}
+    				\caption{Authorities and Hubs values for feminist subnetwork}
+				\end{figure}
+                \begin{figure}[H]
                     \centering
-                    \includegraphics[width=0.75\textwidth]{complete_hubs&authorities.png}
+                    \includegraphics[width=0.75\textwidth]{results/complete_hubs&authorities.png}
                     \caption{Hubs and Authorities joint distribution for complete network}
                 \end{figure}
 		\end{itemize}
+		\newpage
 		\paragraph{Clustering Coefficient.}
+		\mbox{}
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.75\textwidth]{complete_clustering.png}
+            \includegraphics[width=0.75\textwidth]{results/complete_clustering.png}
             \caption{Clustering coefficients distribution for complete network}
         \end{figure}
 		\paragraph{Average Neighbourhood Degree.}
+		\mbox{}
 		\begin{figure}[H]
 			\centering
-            \includegraphics[width=0.75\textwidth]{complete_average_neighbour_degree.png}
+            \includegraphics[width=0.75\textwidth]{results/complete_average_neighbour_degree.png}
             \caption{Average Neighbourhood Degree distribution for complete network}
         \end{figure}
+        \newpage
         \paragraph{Number of Triangles.}
+        \mbox{}
         \begin{figure}[H]
         	\centering
-            \includegraphics[width=0.75\textwidth]{complete_triangles.png}
+            \includegraphics[width=0.75\textwidth]{results/complete_triangles.png}
             \caption{Number of Triangles distribution for complete network}
         \end{figure}
 		\paragraph{Core Number.}
+		\mbox{}
 		\begin{figure}[H]
         	\centering
-            \includegraphics[width=0.75\textwidth]{complete_core.png}
+            \includegraphics[width=0.75\textwidth]{results/complete_core.png}
             \caption{Core Number distribution for complete network}
         \end{figure}
+        \newpage
         \paragraph{Number of Tweets.}
+        \mbox{}
         \begin{figure}[H]
         	\centering
-        	\includegraphics[width=0.75\textwidth]{complete_n_tweets.png}
+        	\includegraphics[width=0.75\textwidth]{results/complete_n_tweets.png}
             \caption{Number of Tweets distribution for complete network}
       	\end{figure}
     \subsection{Classification}
