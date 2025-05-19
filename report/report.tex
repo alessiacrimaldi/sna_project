@@ -33,9 +33,9 @@
 
 % Report in PDF format of at most 5000 words (also after revisions) — approximately, these correspond to 30k characters and 9–10 pages.
 
-% CHECKLIST!!!!!!
+% CHECKLIST:
 
-% [ V ]  It is clear how many networks you are going to analyze and their shape (monomodal, bipartite, etc.).
+% [ V ]  It is clear how many networks you are going to analyse and their shape (monomodal, bipartite, etc.).
 
 % [ V ]  For each network in the study, it is clear what are the nodes and what are the edges (when there exists an edge between nodes) and whether these are oriented or not.
 
@@ -62,16 +62,9 @@
 	% How did you gather the data? Did you digitise it? How? Is the material publicly available? What tools did you use 1) to handle (store, manipulate) the data and 2) to compute measures on the data?
 	The analysis was conducted using the TwiBot-22 dataset \cite{twibot22}, which is publicly available on GitHub\footnote{\href{https://github.com/LuoUndergradXJTU/TwiBot-22}{\texttt{github.com/LuoUndergradXJTU/TwiBot-22}}}. TwiBot-22 is a comprehensive, graph-based benchmark for Twitter bot detection, featuring the largest dataset available up to date. It offers a diverse range of entities and relationships within the Twitter network, and boasts significantly improved annotation quality compared to previous datasets.\\
 	Given the extremely large size of the dataset, it was impossible to work with the full dataset with the available resources. For this reason, preprocessing has been used to elaborate the dataset more efficiently.
-    \subsection{Preprocessing}
-    	In order to preprocess the data, two subsections were considered: tweets and edges. The preprocessing is needed to extract the relation \textit{follower--following} for every user to build the network, and to obtain the number of tweets of each user. Therefore, to allow their storage in the available RAMs, chunks for edges and for tweets were created.\\
+    \subsection{Preprocessing} \label{preprocessing}
+    	In order to preprocess the data, two subsections were considered: tweets and edges. From the latter, the 'follower' and 'following' relationships were extracted and merged into the \textit{follower–-followed} relationship. This procedure was applied for every user in order to build the network and to obtain the number of tweets for each user. Then, to allow their storage in the available RAMs, chunks for edges and for tweets were created.\\
         After this technical solution, to be able to work with all the data, the next step was the creation of the communities. The communities are sub-networks of people who used the same hashtag in their tweets. They will be exploited to check if the patterns found in the network are robust to network changes or are network-specific. To test the robustness of the patterns and to verify the results on different scales, the subnetworks were divided into different categories --large, medium and small communities.
-	\subsection{Adopted tools}
-		The Python libraries used in this project were:
-        \begin{itemize}
-            \item The \textit{Polars} \cite{polars2025} and \textit{pandas} \cite{pandas2020} libraries, and the \textit{ijson} parser, for the manipulation of the dataset.
-            \item The \textit{NetworkX} \cite{hagberg2008} and \textit{NetworKit} \cite{staudt2016} libraries, to create the network and to calculate the measures on it.
-            \item The \textit{seaborn} \cite{seaborn2021}, \textit{SciPy} \cite{scipy2020} and \textit{scikit-learn} \cite{scikit-learn2011} libraries, to search for possible patterns in the bots/humans behaviour.
-        \end{itemize}
 	\subsection{Analyzed networks}
     	As discussed above, subnetworks were divided into three classes\footnote{An interactive graphical version of the subnetworks is available here:\\ \href{https://alessiacrimaldi.github.io/sna_project}{\texttt{alessiacrimaldi.github.io/sna\_project}}}, based on the number of nodes (i.e., users) they contain: small networks have less than 1000 nodes, medium-sized have between 1000 and 10000, and large have more than 10000. Among each class, the focus was put on communities which may have presented more polarising opinions, as they discussed hot topics at the time of the dataset creation.
     	\begin{itemize}
@@ -79,29 +72,36 @@
 			\item Medium $\rightarrow$ nato, deeplearning, nftcommunity
 			\item Small $\rightarrow$ ruleoflaw, feminist, agenda2030
 		\end{itemize}
-		The networks shape is monomodal and they are directed. In particular, an edge from node A to node B means that user A follows user B.\\
+		As a result of the relation-merging process described in Section \ref{preprocessing}, the networks are directed and their shape is monomodal. In particular, an edge from node A to node B means that user A follows user B.\\
+		Figure~\ref{fig:feminist_subnetwork} illustrates the feminist subnetwork\footnote{Available at:\\ \href{https://alessiacrimaldi.github.io/sna_project/results/subnetworks/feminist/feminist_network}{\texttt{alessiacrimaldi.github.io/sna\_project/results/subnetworks/feminist/feminist\_network}}}, where node size indicates the number of tweets authored by each account. Nodes representing bots are coloured in red, while human users are shown in green.\\
 		
-		Figure~\ref{fig:feminist_subnetwork} illustrates the feminist subnetwork\footnote{Available at:\\ \href{https://alessiacrimaldi.github.io/sna_project/results/subnetworks/feminist/feminist_network}{\texttt{alessiacrimaldi.github.io/sna\_project/results/subnetworks/feminist/feminist\_network}}}, where node size indicates the number of tweets authored by each account. Nodes representing bots are coloured in red, while human users are shown in green.
 		\begin{figure}[H]
     		\centering
     		\includegraphics[width=\textwidth]{feminist_subnetwork.png}
     		\caption{Feminist subnetwork}
     		\label{fig:feminist_subnetwork}
 		\end{figure}
+	\subsection{Adopted tools}
+		The Python libraries used in this project were:
+        \begin{itemize}
+            \item The \textit{Polars} \cite{polars2025} and \textit{pandas} \cite{pandas2020} libraries, and the \textit{ijson} parser, for the manipulation of the dataset.
+            \item The \textit{NetworkX} \cite{hagberg2008} and \textit{NetworKit} \cite{staudt2016} libraries, to create the network and to calculate the measures on it.
+            \item The \textit{seaborn} \cite{seaborn2021}, \textit{SciPy} \cite{scipy2020} and \textit{scikit-learn} \cite{scikit-learn2011} libraries, to search for possible patterns in the bots/humans behaviour.
+        \end{itemize}
 		
 
 \section{Validity and Reliability} \label{validity-and-reliability-not-needed-for-the-project-proposal}
 	% How closely does the model of your dataset represent reality (validity)? How does the way you treat the data affect the reproducibility of the study (reliability)?
 	As discussed in its official paper \cite{twibot22}, the TwiBot-22 dataset was created trying to address and mitigate known problems of previous datasets, such as poor annotation quality and low dataset scale. This led to the construction of a large social graph with real world tweets, relationships between entities and metadata. This design allows the results to be statistically relevant, and it accurately reflects Twitter’s social dynamics. Moreover, the dataset benefits from a strong annotation pipeline, which guarantees reliability and consistency, as well as reproducibility for a wide range of bot detection and behaviour analysis studies. It is also easily accessible and freely available.\\
-    In this work, the dataset was exploited focusing only on \textit{follower--following} relationships between users. Additionally, experiments were made by applying the same analytical measures to the full graph and subgraphs based on shared hashtags, in order to introduce a topical dimension to the analysis. This approach maintains the validity of the dataset, as both the follower links and the shared hashtag activity represent authentic user behaviours and capture meaningful patterns within Twitter’s social structure. The results are also fully reproducible and reliable, as a detailed description of the preprocessing pipeline, used to tailor the dataset to the specific research goals, is provided.
+    In this work, the dataset was exploited focusing only on \textit{follower--followed} relationships between users. Additionally, experiments were made by applying the same analytical measures to the full graph and subgraphs based on shared hashtags, in order to introduce a topical dimension to the analysis. This approach maintains the validity of the dataset, as both the follower links and the shared hashtag activity represent authentic user behaviours and capture meaningful patterns within Twitter’s social structure. The results are also fully reproducible and reliable, as a detailed description of the preprocessing pipeline, used to tailor the dataset to the specific research goals, is provided.
 
 
 \section{Measures and Results} \label{measures}
 	% What measures did you apply (brief explanation of how they work)? How do they relate to the intent of the study? Why are they relevant? What is the connection among the gathered data, the applied measures, and the properties found?
 	As previously discussed in Section \ref{dataset}, during the initial experiments, several structural measures were computed on sub-sampled versions of the network to reduce computational complexity. However, the patterns that were intended to be identified did not clearly emerge. This has led to consider the possibility that this sub-sampling method might be introducing biases, potentially distorting or even removing the effects that could give rise to such patterns.\\
-	To investigate this hypothesis, the results obtained from the sub-samples were compared with those computed on the full graph. All experiments were conducted on an NVIDIA GeForce RTX 3090 GPU (24GB VRAM), which allowed to perform the necessary computations at scale. By directly analyzing the complete dataset, it was observed that the results were consistent with those from the sub-samples, suggesting that the sub-sampling procedure did not introduce significant bias. This confirmation supports the reliability of the methodology and validates the interpretability of earlier findings based on sub-sampled data.
+	To investigate this hypothesis, the results obtained from the sub-samples were compared with those computed on the full graph. All experiments were conducted on an NVIDIA GeForce RTX 3090 GPU (24GB VRAM), which allowed to perform the necessary computations at scale. By directly analyzing the complete dataset, it was observed that the results were consistent with most of those from the sub-samples, suggesting that the sub-sampling procedure did not introduce significant bias. This confirmation supports the reliability of the methodology and validates the interpretability of earlier findings based on sub-sampled data.
 	\subsection{Measuring the Network}
-    	One of the core assumptions in the study was the idea that bots show different behaviour when it comes to forming \textit{follower--following} relationships with other users. Especially, bots were expected to form less homogeneous connections, more based on random choices with respect to humans. As a consequence, the presence of bots was expected to have an effect on the overall network.\\
+    	One of the core assumptions in the study was the idea that bots show different behaviour when it comes to forming \textit{follower--followed} relationships with other users. Especially, bots were expected to form less homogeneous connections, more based on random choices with respect to humans. As a consequence, the presence of bots was expected to have an effect on the overall network.\\
     	As a preliminary examination, to confirm previous suppositions on bot behaviour, it was decided to conduct some measurements on the entire network. Given the size of the dataset, the feasibility of some of these measures was conditioned by the computational limitations.\\
     	To highlight the effects of bots on the network, three main versions of the original \textit{follower--followed} graph were created: 
         \begin{itemize}
@@ -109,7 +109,7 @@
             \item human nodes graph, obtained by considering only human users, having 612.329 nodes;
             \item human-human edges graph, obtained by considering only human users connected only to other human users, with 589.924 nodes.
         \end{itemize}
-        A key difference between the second and third subgraphs is that the latter excludes all those human users who were only followed or were followed by bots: a total of 22.405 users.\\
+        A key difference between the second and third subgraphs is that the latter excludes all those human users who were following or were followed by bots: a total of 22.405 users.\\
         The analysis proceeded by examining the number of components present in each of these graphs, discovering that there seemed to be only one main large component which constitutes most of the graph, both in the first and third cases. As expected, the second subgraph presented a high number of isolated users.\\
         The next step was verifying the scale-free nature of these networks. To do so, the degree centrality of all nodes was computed and their distribution was tested, fitting a power law and observing the results. They were positive, since all the three of them fitted perfectly in a power-law distribution, having \(2<\alpha<3\). This is a further confirmation of the resilience of these types of networks to disruption and scale change, which should prove helpful for sub-sampling in the next steps.\\
         Finally, the hypothesis on bot behaviour was tested by computing density and clustering coefficient on the networks with and without bots. The findings are shown in Table~\ref{tab:network_measures}.
@@ -132,7 +132,7 @@
         
         It is observable that the human-human network has a higher density and clustering coefficient, which can be taken as a hint that bots tend to form fewer or sparser connections with their neighbours, thus partially validating the initial hypothesis. However, the small scale of the differences, considering the number of bots, reveals that their behaviour may be more difficult to spot than previously assumed.
 	\subsection{Measuring the Nodes}
-    	Being tasked with finding notable features which may highlight the differences between human and bot users, it was decided to compute well-established network measurements on the graphs. As the objective of this project is to identify anomalies in the behaviour of specific users, the focus was placed on node measures. Alongside these, a few broader scope measures were added to show the presence of local groups around certain users.
+    	Being tasked with finding notable features which may highlight the differences between human and bot users, it was decided to compute well-established network measurements on the graphs. Accordingly, from this point onwards, only networks containing both humans and bots were considered. As the objective of this project is to identify anomalies in the behaviour of specific users, the focus was placed on node measures. Alongside these, a few broader scope measures were added to show the presence of local groups around certain users.
 		\paragraph{Centrality.}
 		\begin{itemize}
 			\item \textbf{Degree Centrality.} Considering the entire population of users, the degree centrality is the total sum of the number of followers a user has, and the number of accounts they follow. Moderate values might be expected for humans, with followers growing organically, while it is probably more common for bots to have extreme values, either high, if artificially inflated, or low, for simple spam bots. To better investigate this hypothesis, three different measures were considered: \texttt{in\_degree} (the number of followers), \texttt{out\_degree} (number of followed), \texttt{degree\_centrality} (sum of the two).
@@ -305,7 +305,7 @@
             \caption{Number of Tweets distribution for complete network}
       	\end{figure}
     \subsection{Subsampling Results Discussion} \label{subsampling_results}
-    	To summarise the general outcomes of the subsampling process, it can affirmed that from the obtained results a clear pattern emerged in the ability of gradually smaller subnetworks to capture the complexity of the original one. Large subnetworks seem to mirror almost exactly the original's behaviour. Medium-sized ones sometimes show signs of divergence, indicating some loss of structure or nuance. In contrast, small subnetworks seem to have a stochastic behaviour, being heavily influenced by the sampling process, only reflecting the most general trends.
+    	To summarise the general outcomes of the subsampling process, it can be affirmed that from the obtained results a clear pattern emerged in the ability of gradually smaller subnetworks to capture the complexity of the original one. Large subnetworks seem to mirror almost exactly the original's behaviour. Medium-sized ones sometimes show signs of divergence, indicating some loss of structure or nuance. In contrast, small subnetworks seem to have a stochastic behaviour, being heavily influenced by the sampling process, only reflecting the most general trends.
     \subsection{Classification}
     	To discover the most reliable relationships between the extracted measures and the labels (bot and human), it was decided to deploy three classical machine learning techniques for binary classification, as they would help highlighting the most relevant features while ignoring the least relevant ones. This activity was also necessary since no effective trend was noticed by examining each individual distribution across all measures.\\
     	As previously stated, three approaches were attempted:
@@ -366,7 +366,7 @@
 
 \section{Conclusion} \label{conclusion}
 	% Qualitative analysis of the quantitative findings of the study.
-	After conducting the experiments described above, it has been shown that, although some of the results could be interpreted as coherent with the initial hypotheses, they ultimately failed at solving the task of separating the two classes. The initial supposition was that the analysis of networks based on \textit{follower--following} relationships could provide an effective tool for bot detection.
+	After conducting the experiments described above, it has been shown that, although some of the results could be interpreted as coherent with the initial hypotheses, they ultimately failed at solving the task of separating the two classes. The initial supposition was that the analysis of networks based on \textit{follower--followed} relationships could provide an effective tool for bot detection.
 	\vspace{0.2cm}
 	
 	By analysing the measures, some subtle patterns have emerged. However, none of them were individually effective enough for detection.
@@ -375,7 +375,7 @@
 
 \section{Critique} \label{critique}
 	% Do you think your work solves the problem presented above? To which extent (completely, what parts)? Why? What could you have done differently to answer your research problems (e.g., gather data with additional information, build your model differently, apply alternative measures)?
-	It has been proven that the used \textit{follower} and \textit{following} connections do not represent meaningful relations for bot detection. This could be due to multiple reasons:
+	It has been proven that the used \textit{follower--followed} connection does not represent a meaningful relation for bot detection. This could be due to multiple reasons:
 	\begin{itemize}
 		\item The dataset was thought to be used in its entirety. Therefore, considering just a specific class of relationships greatly reduced its expressiveness.
 		\item The measures applied could not provide enough significant information for the analysis. Perhaps, the use of measures tailored for this problem domain could have been more insightful.
@@ -388,14 +388,14 @@
 	
 	
 \newpage
-\bibliographystyle{plain}
+\bibliographystyle{unsrt}
 \bibliography{references}
 
 
 \newpage
 \appendix
 \section{Github Repository}
-	The full source code is available at the following link:
+	The project's source code and artefacts are available at the following link:
 	
 	\href{https://github.com/alessiacrimaldi/sna_project}{\texttt{github.com/alessiacrimaldi/sna\_project}}
 
